@@ -1,0 +1,73 @@
+[production]
+    log_level = "WARNING"
+
+    [production.flask]
+    debug = false
+    secret_key = "fqv_ygy0qab5FGE.yqu"
+
+    [production.sqlalchemy]
+    uri = "mysql+pymysql://root:Tim123456@db:3306"
+    database = "pika"
+    create_default_records = false
+
+    [production.elastic]
+    url = "https://es01:9200"
+    password = "Tim123456"
+    ca_path = "/application/certs/ca/ca.crt"
+
+    [production.mail]
+    server = '503.hosttech.eu'
+    port = 587
+    use_tls = true
+    username = 'pika@jollyrodger.ch'
+    password = 'wgn*upf8NEW2chq3xey'
+
+
+[development]
+    log_level = "DEBUG"
+
+    [development.flask]
+    debug = true
+    secret_key = "Development Key"
+
+    [development.sqlalchemy]
+    uri = "mysql+pymysql://root:Tim123456@localhost:3306"
+    database = "pika"
+    create_default_records = true
+
+    [development.elastic]
+    url = "https://localhost:9200"
+    password = "Tim123456"
+    ca_path = "./http_ca.crt"
+
+    [development.mail]
+    server = '503.hosttech.eu'
+    port = 587
+    use_tls = true
+    username = 'pika@jollyrodger.ch'
+    password = 'wgn*upf8NEW2chq3xey'
+
+# Configuration used when running application as standalone image (not as part of a compose app).
+[development-docker]
+    log_level = "DEBUG"
+
+    [development-docker.flask]
+    debug = true
+    secret_key = "Development Key"
+
+    [development-docker.sqlalchemy]
+    uri = "mysql+pymysql://root:Tim123456@dev-mysql:3306"
+    database = "pika"
+    create_default_records = true
+
+    [development-docker.elastic]
+    url = "https://172.25.0.3:9200"
+    password = "Tim123456"
+    ca_path = "./http_ca.crt"
+
+    [development-docker.mail]
+    server = '503.hosttech.eu'
+    port = 587
+    use_tls = true
+    username = 'pika@jollyrodger.ch'
+    password = 'wgn*upf8NEW2chq3xey'

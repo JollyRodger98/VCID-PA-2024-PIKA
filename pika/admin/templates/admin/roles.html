@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% from 'admin/navigation.html' import navigation %}
+
+{% block title %}{{ _('Roles') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ _('Roles') }}</h1>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                {{ navigation('roles', user_roles=current_user.get_roles()) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="table-secondary">{{ _('User') }}/{{ _('Role') }}</th>
+                        {% for role in roles %}
+                            <th scope="col">{{ role.name | title }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <th scope="row">{{ user.username }}</th>
+                            {% for role in roles %}
+                                <td>
+                                    <form method="POST"
+                                            {% if role in user.roles %}
+                                          action="{{ url_for('admin.administrator.remove_role') }}"
+                                            {% else %}
+                                          action="{{ url_for('admin.administrator.assign_role') }}"
+                                            {% endif %}
+                                    >
+                                        {{ form.csrf_token }}
+                                        {{ form.user_id(value=user.user_id) }}
+                                        {{ form.role_id(value=role.id) }}
+                                        <button type="submit" class="btn border-0 p-0 text-primary{% if user.username in [current_user.username, 'Admin'] %} disabled{% endif %}">
+                                            {% if role in user.roles %}
+                                                <i class="bi bi-check-square"></i>
+                                            {% else %}
+                                                <i class="bi bi-square"></i>
+                                            {% endif %}
+                                        </button>
+                                    </form>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

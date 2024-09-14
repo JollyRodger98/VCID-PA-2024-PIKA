@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% from "library/macros.html" import series_table_row, library_pages_navbar, pagination_nav %}
+
+{% block title %}{{ _('Series') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                {{ library_pages_navbar(active_page="series") }}
+            </div>
+            <div class="col-12 mb-3">
+                <div class="row">
+                    <div class="col">
+                        <h2><i class="bi bi-card-list me-2"></i> {{ ngettext('Series', 'Series', 2) }}</h2>
+                    </div>
+                    <div class="col-auto">
+                        <a role="button" class="btn btn-outline-secondary"
+                           href="{{ url_for("library.series.add_page") }}">
+                            <i class="bi bi-plus-lg me-2"></i>{{ ngettext('Series', 'Series', 2) }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ _('Title') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for series in series_page.series %}
+                        {{ series_table_row(series) }}
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+                {# {{ series_page | safe }} #}
+            </div>
+            <div class="col-12">
+                {{ pagination_nav(pages, current_page, series_page["last"], "library.series.index") }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

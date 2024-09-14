@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% from "community/macros.html" import profile_link, post_card %}
+{% from "components/forms/forms.html" import base_form %}
+
+{% block title %}{{ thread.title }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h2>{{ thread.title }}</h2>
+                <div class="text-muted">
+                    <i class="bi bi-clock"></i> {{ thread.created | datetimeformat }}
+                    <i class="bi bi-person ms-2"></i> {{ profile_link(thread.author.username, "text-reset") }}
+                    <i class="bi bi-eye ms-2"></i> {{ thread.views }}
+                </div>
+            </div>
+            <div class="col-12 mb-4">
+                <div class="row row-cols-1 g-2">
+                    {% if thread.posts|length is gt 0 %}
+                        {% for post in thread.posts %}
+                            {{ post_card(loop.index, post, edit_button=(current_user.user_id==post.author.user_id)) }}
+                        {% endfor %}
+                    {% else %}
+                        <div class="col">
+                            <p class="fst-italic text-muted">{{ _('There are no posts in this thread yet.') }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <hr>
+            <div class="col-12">
+                {% if current_user.is_authenticated %}
+                    <form method="POST" action="{{ url_for("community.post_add_form", thread_id=thread.thread_id) }}">
+                        <div class="form-floating mb-3">
+                            {{ form.content(style="height: 10rem;", placeholder="Reply") }}
+                            <label class="text-muted" for="content">{{ _('Reply to thread') }}</label>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.csrf_token }}
+                            {{ form.post }}
+                        </div>
+                    </form>
+                {% else %}
+                    <a role="button" class="btn btn-primary" href="{{ url_for("auth.login_page") }}">{{ _('Login to Reply') }}</a>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="modal fade" id="postEditModal" tabindex="-1" aria-labelledby="postEditModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="postEditModalLabel">{{ _('Edit Post') }}</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST"
+                                      action="{{ url_for("community.post_edit_form", thread_id=thread.thread_id) }}"
+                                      id="postEditForm">
+                                    <div class="mb-3">
+                                        {{ edit_form.content }}
+                                        {{ edit_form.author_id }}
+                                        {{ edit_form.post_id }}
+                                        {{ edit_form.csrf_token }}
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ _('Close') }}</button>
+                                {{ edit_form.post(form="postEditForm") }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        const postEditModal = document.getElementById('postEditModal')
+        const posts = {{ author_posts | tojson }}
+        if (postEditModal) {
+            postEditModal.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget
+
+                const edit_post_id = button.getAttribute('data-bs-post-id')
+                const post = posts.filter(({post_id}) => String(post_id) === edit_post_id)[0]
+
+                const postContent = postEditModal.querySelector(".modal-body textarea")
+                const postAuthorId = postEditModal.querySelector(".modal-body #author_id")
+                const postPostId = postEditModal.querySelector(".modal-body #post_id")
+
+                postContent.innerHTML = post.content
+                postAuthorId.value = post["author_id"]
+                postPostId.value = post["post_id"]
+            })
+        }
+    </script>
+{% endblock %}

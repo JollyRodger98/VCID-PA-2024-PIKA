@@ -1,0 +1,15 @@
+{% macro debug_collapse(title, data) %}
+    <div class="collapse" id="debug-collapse">
+        <div class="card">
+            <h4 class="card-header">{{ title }}</h4>
+            <div class="card-body pt-1">
+                    <pre>
+                    <code>
+                        <br class="invisible">
+                        {{- data | pprint -}}
+                    </code>
+                    </pre>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

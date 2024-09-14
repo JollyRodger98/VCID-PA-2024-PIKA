@@ -1,0 +1,68 @@
+[
+  {
+    "order": 4,
+    "en": {
+      "question": "How to reactivate disabled accounts?",
+      "answer": "Contact the site administration via the <a href=\"{contact_form}?subject=Account reactivation\">contact</a> form. Your account will be reactivated as soon as possible."
+    },
+    "de": {
+      "question": "Wie reaktiviere ich deaktivierte Konten?",
+      "answer": "Kontaktieren Sie die Administration über das <a href=\"{contact_form}?subject=Reaktivierung des Kontos\">Kontaktformular</a>. Ihr Konto wird so schnell wie möglich reaktiviert."
+    }
+  },
+  {
+    "order": 3,
+    "en": {
+      "question": "Will there be any big new features for the website?",
+      "answer": "<strong>No.</strong> This website is, in essence, a school project.<br>If you have any idea, you can post it to the \"Improvement Requests\" thread. Those requests and suggestions <i>may</i> be implemented in the future."
+    },
+    "de": {
+      "question": "Wird es neue Funktionen für die Website geben?",
+      "answer": "<strong>Nein.</strong> Diese Website ist im Wesentlichen ein Schulprojekt.<br>Wenn Sie eine Idee haben, können Sie diese im Thread \"Improvement Requests\" posten. Diese Wünsche und Vorschläge <i>könnten</i> in der Zukunft umgesetzt werden."
+    }
+  },
+  {
+    "order": 2,
+    "en": {
+      "question": "Why books?",
+      "answer": "They are useful when showcasing a practical implementation of database relationships."
+    },
+    "de": {
+      "question": "Warum Bücher?",
+      "answer": "Sie sind nützlich, um eine praktische Implementierung von Datenbankbeziehungen zu demonstrieren."
+    }
+  },
+  {
+    "order": 1,
+    "en": {
+      "question": "What is this website?",
+      "answer": "This website has a few functions. Amongst them the following:<br><ul><li>A library with:<ul><li>Books</li><li>Series</li><li>Authors</li></ul></li><li>A community to discuss books.</li></ul>The purpose of this website is to be a practical example and the final coursework for a database, web-development, IT-architecture and server hosting course."
+    },
+    "de": {
+      "question": "Was ist diese Website?",
+      "answer": "Diese Website hat einige Funktionen. Darunter die folgenden:<br><ul><li>Eine Bibliothek mit:<ul><li>Büchern</li><li>Serien</li><li>Autoren</li></ul></li><li>Eine Community zum Diskutieren von Büchern.</li></ul>Der Zweck dieser Website ist es, ein praktisches Beispiel und die Abschlussarbeit für einen Kurs zu Datenbanken, Webentwicklung, IT-Architektur und Serverhosting zu sein."
+    }
+  },
+  {
+    "order": 5,
+    "en": {
+      "question": "How to delete a disabled accounts?",
+      "answer": "Contact the site administration via the <a href=\"{contact_form}?subject=Account deletion\">contact</a> form. A confirmation of the account deletion will be sent by the site administration."
+    },
+    "de": {
+      "question": "Wie lösche ich ein deaktiviertes Konto?",
+      "answer": "Kontaktieren Sie die Site-Administration über das <a href=\"{contact_form}?subject=Kontolöschung\">Kontaktformular</a>. Sie erhalten von der Administration eine Bestätigung über die Löschung des Accounts."
+    }
+  },
+  {
+    "order": 5,
+    "en": {
+      "question": "How to get my data deleted?",
+      "answer": "Contact the site administration via the <a href=\"{contact_form}?subject=Data deletion\">contact</a> form. A confirmation of the data deletion will be sent by the site administration."
+    },
+    "de": {
+      "question": "Wie kann ich meine Daten löschen lassen?",
+      "answer": "Kontaktieren Sie die Site-Administration über das <a href=\"{contact_form}?subject=Kontolöschung\">Kontaktformular</a>. Sie erhalten von der Administration eine Bestätigung über die Löschung der Daten."
+    }
+  }
+]

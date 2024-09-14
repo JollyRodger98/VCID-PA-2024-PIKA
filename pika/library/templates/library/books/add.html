@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "library/forms.html" import book_form %}
+{% from "library/macros.html" import add_pages_navbar %}
+
+{% block title %}{{ _('New Book') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                {{ add_pages_navbar(active_page="books") }}
+            </div>
+            <div class="col-12 mb-3">
+                <h2><i class="bi bi-book me-2"></i>{{ _('New Book') }}</h2>
+            </div>
+            <div class="col-12">
+                {{ book_form(form, "add") }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

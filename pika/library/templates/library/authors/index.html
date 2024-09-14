@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% from "library/macros.html" import author_table_row, library_pages_navbar, pagination_nav %}
+
+{% block title %}{{ _('Authors') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                {{ library_pages_navbar(active_page="authors") }}
+            </div>
+            <div class="col-12 mb-3">
+                <div class="row">
+                    <div class="col">
+                        <h2><i class="bi bi-person me-2"></i>{{ _('Authors') }}</h2>
+                    </div>
+                    <div class="col-auto">
+                        <a role="button" class="btn btn-outline-secondary"
+                           href="{{ url_for("library.authors.add_page") }}">
+                            <i class="bi bi-plus-lg me-2"></i>{{ _('Authors') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ _('Last Name') }}</th>
+                        <th scope="col">{{ _('First Name') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for author in authors_page.authors %}
+                        {{ author_table_row(author) }}
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+                {# {{ authors_page | safe }} #}
+            </div>
+            <div class="col-12">
+                {{ pagination_nav(pages, current_page, authors_page["last"], "library.authors.index") }}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

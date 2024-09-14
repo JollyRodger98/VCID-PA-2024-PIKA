@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% from 'admin/navigation.html' import navigation %}
+
+{% macro parse_timedelta(now, date) %}
+    {% set timedelta = now - date %}
+    <p class="m-0 user-select-none">
+        <abbr title="{{ date | datetimeformat }}">
+            {% if timedelta.days is gt 0 %}
+                {# {{ timedelta.days }} Days ago #}
+                {{ ngettext('%(num)s day ago', '%(num)s days ago', timedelta.days) }}
+            {% elif timedelta.days is eq 0 %}
+                {% if (timedelta.seconds // 60) is ge 60 %}
+                    {# {% if (timedelta.seconds // 60 // 60) is eq 1 %} #}
+                    {# 1 Hour ago #}
+                    {# {% else %} #}
+                    {# {{ timedelta.seconds // 60 // 60 }} Hour ago #}
+                    {# {% endif %} #}
+                    {{ ngettext('%(num)s hour ago', '%(num)s hours ago', timedelta.seconds//60//60) }}
+                {% else %}
+                    {# {% if (timedelta.seconds // 60) is eq 1 %} #}
+                    {#     1 Minute ago #}
+                    {# {% else %} #}
+                    {#     {{ timedelta.seconds // 60 }} Minutes ago #}
+                    {# {% endif %} #}
+                    {{ ngettext('%(num)s minute ago', '%(num)s minutes ago', timedelta.seconds//60) }}
+                {% endif %}
+            {% endif %}
+        </abbr>
+    </p>
+{% endmacro %}
+
+{% macro parse_active_status(status) %}
+    {% if status %}
+        <i class="bi bi-check-circle-fill text-success"></i>
+    {% else %}
+        <i class="bi bi-x-circle-fill text-danger"></i>
+    {% endif %}
+{% endmacro %}
+
+{% block title %}{{ _('Users') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ _('Users') }}</h1>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                {{ navigation('users', user_roles=current_user.get_roles()) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{ _('Active') }}</th>
+                        <th>{{ _('Name') }}</th>
+                        <th>{{ _('Username') }}</th>
+                        <th>{{ _('E-Mail') }}</th>
+                        <th>{{ _('Last Login') }}</th>
+                        <th>{{ _('Account Created') }}</th>
+                        <th>{{ _('Token') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for user in all_users %}
+                        <tr>
+                            <td>{{ parse_active_status(user.active) }}</td>
+                            <td>{{ user.first_name | default('', true) }} {{ user.last_name | default('', true) }}</td>
+                            <td>
+                                <a href="{{ url_for('community.profile', username=user.username) }}">{{ user.username }}</a>
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ parse_timedelta(now, user.get_last_login()) }}</td>
+                            <td>{{ parse_timedelta(now, user.get_created_at()) }}</td>
+                            <td>
+
+                                <input type="hidden" value="{{ user.token }}" id="userToken{{ loop.index }}">
+                                <div class="btn-group ms-auto">
+                                    <button type="button"
+                                            class="btn btn-primary btn-sm{% if not user.token %} disabled{% endif %}"
+                                            onclick="copy_to_clipboard('userToken{{ loop.index }}')"
+                                    >
+                                        {{ _('Copy') }}
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        <span class="visually-hidden">Edit Dropdown Toggle</span>
+                                    </button>
+                                    <ul class="dropdown-menu py-1">
+                                        <li>
+                                            <form method="post"
+                                                  action="{{ url_for('admin.administrator.renew_token') }}"
+                                            >
+                                                {{ renew_form.csrf_token }}
+                                                {{ renew_form.user_id(value=user.user_id) }}
+                                                <button class="dropdown-item small" type="submit">
+                                                    {{ _('Renew') }}
+                                                </button>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <form method="post"
+                                                  action="{{ url_for('admin.administrator.revoke_token') }}"
+                                            >
+                                                {{ revoke_form.csrf_token }}
+                                                {{ revoke_form.user_id(value=user.user_id) }}
+                                                <button class="dropdown-item small" type="submit">
+                                                    {{ _('Revoke') }}
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block script %}
+    <script type="application/javascript">
+        function copy_to_clipboard(field_id) {
+            const copyText = document.getElementById(field_id);
+            {#copyText.select();#}
+            {#copyText.setSelectionRange(0, 99999);#}
+            navigator.clipboard.writeText(copyText.value);
+        }
+    </script>
+{% endblock script %}

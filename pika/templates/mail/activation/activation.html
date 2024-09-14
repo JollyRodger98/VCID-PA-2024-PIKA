@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<p>{{ _('Hi') }}, {{ username }}</p>
+<p>{{ _('To complete your registration click or copy the link below.') }}</p>
+<p><a href="{{ url_for('auth.activate', token=token, _external=true) }}">{{ _('Activate Account') }}</a></p>
+<p style="font-size: smaller; color: gray">{{ url_for('auth.activate', token=token, _external=true) }}</p>
+</body>
+</html>

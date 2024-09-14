@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% from "library/macros.html" import author_link_list %}
+
+{% block title %}Search Results{% endblock title %}
+
+{% macro result_list_group_item(title, href, body_content=false) %}
+    <li class="list-group-item list-group-item-action">
+        <div>
+            <a class="stretched-link text-reset text-decoration-none fw-bolder" href="{{ href }}">{{ title }}</a>
+        </div>
+        {% if body_content is true %}
+            <div>
+                {{ caller() }}
+            </div>
+        {% endif %}
+    </li>
+{% endmacro %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-12">
+                <h1>{{ _('Search Results') }}: <span class="fst-italic">{{ query }}</span></h1>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <h2>{{ _('Books') }}</h2>
+            </div>
+            <div class="col-12">
+                <ul class="list-group">
+                    {% for book in book_results %}
+                        {% call result_list_group_item(book.title, url_for("library.books.details", book_id=book.book_id), body_content=true) %}
+                            by {{ author_link_list(book.authors) }}
+                        {% endcall %}
+                    {% else %}
+                        <span class="fst-italic">{{ _('No Results') }}</span>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <h2>{{ ngettext('Series', 'Series', 2) }}</h2>
+            </div>
+            <div class="col-12">
+                <ul class="list-group">
+                    {% for series in series_results %}
+                        {% call result_list_group_item(series.title, url_for("library.series.details", series_id=series.series_id), body_content=true ) %}
+                            <i class="bi bi-book me-1"></i>{{ series.books | count }}
+                        {% endcall %}
+                    {% else %}
+                        <span class="fst-italic">{{ _('No Results') }}</span>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2>{{ _('Authors') }}</h2>
+            </div>
+            <div class="col-12">
+                <ul class="list-group">
+                    {% for author in author_results %}
+                        {% call result_list_group_item(author.full_name, url_for("library.authors.details", author_id=author.author_id), body_content=true ) %}
+                            <i class="bi bi-book me-1"></i>{{ author.books | count }}
+                            <i class="bi bi-card-list ms-2 me-1"></i>{{ author.series | count }}
+                        {% endcall %}
+                    {% else %}
+                        <span class="fst-italic">{{ _('No Results') }}</span>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

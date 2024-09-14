@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from "admin/macros.html" import user_data_table_row %}
+{% from 'admin/navigation.html' import navigation %}
+
+{% block title %}{{ _('Dashboard') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ _('Dashboard') }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {{ navigation('dashboard', user_roles=current_user.get_roles()) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <tbody>
+                    {{ user_data_table_row(_('Username'), current_user.username) }}
+                    {{ user_data_table_row(_('First-/Lastname'), full_name) }}
+                    {{ user_data_table_row(_('Password'), "*"*6) }}
+                    {{ user_data_table_row(_('E-Mail'), current_user.email or "") }}
+                    {{ user_data_table_row(_('Last Login'), current_user.last_login | datetimeformat(format='medium')) }}
+                    {{ user_data_table_row(_('Account Created'), current_user.created_at | datetimeformat(format='medium')) }}
+{#                    {{ user_data_table_row(_('Last Login'), current_user.get_last_login().strftime("%d.%m.%Y %X")) }}#}
+{#                    {{ user_data_table_row(_('Account Created'), current_user.get_created_at().strftime("%d.%m.%Y %X")) }}#}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% macro jumbotron(title) %}
+    <div class="bg-body-secondary rounded-3 my-2 p-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <h3>{{ title }}</h3>
+                </div>
+            </div>
+            <hr class="my-2">
+            {# Jumbotron content #}
+            {{ caller() }}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro jumbotron_section(title) %}
+    <div class="row mb-3">
+        <div class="col-12">
+            <h4>{{ title }}</h4>
+        </div>
+        <div class="col">
+            {# Section content #}
+            {{ caller() }}
+        </div>
+    </div>
+{% endmacro %}

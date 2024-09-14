@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% from "components/forms/fields.html" import field %}
+
+{% block title %}Import Book{% endblock title%}
+
+{% block body %}
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-12 mb-3">
+                <h2>{{ _('Goodreads Import') }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <form method="POST" action="{{ url_for("library.import_from_goodreads_form") }}">
+                    {% call field() %}
+                        {{ form.import_url.label(class_="form-label") }}
+                        {{ form.import_url }}
+                    {% endcall %}
+                    {% call field() %}
+                        {{ form.hidden_tag() }}
+                        {{ form.import_submit }}
+                    {% endcall %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

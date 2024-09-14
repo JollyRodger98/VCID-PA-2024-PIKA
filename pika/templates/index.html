@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock title %}
+{% from "library/macros.html" import author_link_list, book_link %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h2>Home</h2>
+            </div>
+        </div>
+        <div class="row">
+{#            <div class="col">#}
+{#                <a role="button" class="btn btn-primary" href="{{ url_for('test_endpoint') }}">Send Mail</a>#}
+{#            </div>#}
+            <div class="col-12">
+                <div id="recentReleasesCarousel" class="carousel slide">
+                    <div class="carousel-inner">
+                        {% for book in recent_releases %}
+                            <div class="carousel-item{% if loop.first %} active{% endif %}">
+                                <div class="card border-0">
+                                    <div class="row g-0">
+                                        <div class="col-2 offset-1">
+                                            <a href="{{ url_for("library.books.details", book_id=book.book_id) }}">
+                                                <img class="d-block w-100 rounded-start"
+                                                        {% if book.cover %}
+                                                     src="{{ url_for("library.static", filename=book.cover) }}"
+                                                        {% else %}
+                                                     src="https://placehold.co/400x600?text={{ book.title | replace(' ', '+') }}"
+                                                        {% endif %}
+                                                     alt="Book Cover"
+                                                     style="width:200px; aspect-ratio:6/9"
+                                                >
+                                            </a>
+                                        </div>
+                                        <div class="col-8 d-flex flex-column">
+                                            <div class="card-header">
+                                                <h3 class="card-title">
+                                                    {{ book_link(book.book_id, book.title, class_="link-dark link-underline-opacity-0 link-underline-opacity-100-hover") }}
+                                                </h3>
+                                                <p class="card-subtitle">{{ author_link_list(book.authors) }}</p>
+                                            </div>
+                                            <div class="card-body position-relative">
+                                                <p class="card-text">
+                                                    {{ book.synopsis | truncate }}
+                                                </p>
+                                                <a class="stretched-link"
+                                                   href="{{ url_for("library.books.details", book_id=book.book_id) }}"></a>
+                                            </div>
+                                            <div class="card-footer">
+                                                <span class="text-muted">
+{#                                                    {{ _('Released') }} {{ book.release_date.strftime("%d %B %Y") }}#}
+                                                    {{ _('Released') }} {{ book.release_date | dateformat('full')  }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#recentReleasesCarousel"
+                            data-bs-slide="prev" style="width: 8%">
+                        <span class="carousel-control-prev-icon text-bg-dark rounded me-5" aria-hidden="true"></span>
+                        <span class="visually-hidden">{{ _('Previous') }}</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#recentReleasesCarousel"
+                            data-bs-slide="next" style="width: 8%">
+                        <span class="carousel-control-next-icon text-bg-dark rounded ms-5" aria-hidden="true"></span>
+                        <span class="visually-hidden">{{ _('Next') }}</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

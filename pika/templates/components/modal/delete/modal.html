@@ -1,0 +1,30 @@
+{% macro delete_form_modal(form, modal_id, endpoint, resource_name, resource_type) %}
+    <div class="modal fade"
+         id="delete{{ modal_id | title }}Modal"
+         tabindex="-1"
+         aria-labelledby="delete{{ modal_id | title }}ModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="delete{{ modal_id | title }}ModalLabel">
+                        {{ _('Delete %(resource_type)s', resource_type=resource_type) }}
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ _('Are you sure you wish to delete <span class="fw-bolder">%(resource_name)s</span>?', resource_name=resource_name) }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ _('Close') }}</button>
+                    <form method="post" action="{{ endpoint }}">
+                        {{ form.csrf_token }}
+                        <button class="btn btn-danger" type="submit">
+                            <i class="bi bi-trash me-2"></i>{{ _('Yes') }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

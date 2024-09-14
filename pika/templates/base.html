@@ -1,0 +1,63 @@
+{% from "components/navbar/navbar.html" import navbar -%}
+{% from "components/footer/footer.html" import footer -%}
+{% from "components/tags/script_css.html" import link_tag, script_tag -%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{#- Page Head #}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %} - PIKA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ link_tag(href=url_for("static", filename="css/global.css")) }}
+    {{ link_tag(href=url_for("static", filename="node_modules/bootstrap/dist/css/bootstrap.css")) }}
+    {{ script_tag(src=url_for("static", filename="node_modules/bootstrap/dist/js/bootstrap.bundle.js")) }}
+    {{ link_tag(href=url_for("static", filename="node_modules/bootstrap-icons/font/bootstrap-icons.css")) }}
+</head>
+
+{#- Page Body #}
+<body class="d-flex flex-column vh-100">
+{#<body>#}
+
+{#- Header #}
+<header>
+    {{ navbar(current_user.username, current_user.is_authenticated, login_form, active_pages) }}
+    <div id="liveAlertPlaceholder" style="position: absolute; left: 25%; top: 4rem; width: 50%;"></div>
+</header>
+
+{#- Body #}
+<main class="flex-grow-1">
+    {#<main>#}
+    {% block body %}
+    {% endblock %}
+</main>
+
+{#- Footer #}
+{{ footer() }}
+
+{#- Scripts #}
+{{ script_tag(src=url_for("static", filename="js/alerts.js")) }}
+<script type="text/javascript">
+    {% with messages = get_flashed_messages(with_categories=true) -%}
+        const messages = {{ messages | tojson }}.map(
+            (element) => {
+                let category
+                if (element[0] === "message") {
+                    category = "primary"
+                } else {
+                    category = element[0]
+                }
+                return {message: element[1], category: category}
+            })
+    {% endwith -%}
+    messages.forEach(({message, category}) => {
+        appendAlert(message, category)
+    })
+</script>
+{% block script %}
+{% endblock %}
+
+</body>
+
+</html>

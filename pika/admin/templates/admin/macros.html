@@ -1,0 +1,12 @@
+{% macro user_data_table_row(head, data, editable=False) %}
+    <tr>
+        <th class="w-50" scope="row">{{ head }}</th>
+        {% if editable %}
+            <td class="w-50">{{ data }}</td>
+            <td>{{ caller() }}</td>
+        {% else %}
+            <td class="w-50" colspan="2">{{ data }}</td>
+        {% endif %}
+    </tr>
+{% endmacro %}
+.

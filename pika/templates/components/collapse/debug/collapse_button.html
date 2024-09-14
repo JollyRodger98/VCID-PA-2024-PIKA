@@ -1,0 +1,12 @@
+{% macro debug_collapse_button(class_) %}
+    <button class="{{ class_ }}"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#debug-collapse"
+            aria-expanded="false"
+            aria-controls="debug-collapse"
+    >
+        <i class="bi bi-bug me-2"></i>{{ _('Debug') }}
+    </button>
+
+{% endmacro %}

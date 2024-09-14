@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% from "library/macros.html" import author_link_list, series_link, book_data_table_row, parse_read_status, edit_dropdown, dropdown_form_button %}
+{% from "components/collapse/debug/collapse.html" import debug_collapse %}
+{% from "components/collapse/debug/collapse_button.html" import debug_collapse_button %}
+{% from "components/modal/delete/modal.html" import delete_form_modal %}
+{% from "components/modal/delete/button.html" import delete_form_modal_button %}
+
+{% block title %}{{ book.title }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col">
+                <h5>{{ series_link(book.series, book.volume_nr_as_string) }}</h5>
+                <h1>{{ book.title }}</h1>
+                <h5>{{ _('by') }} {{ author_link_list(book.authors) }}</h5>
+            </div>
+            <div class="col-auto">
+                {% call edit_dropdown(url_for("library.books.edit_page", book_id=book.book_id)) %}
+                    <li><h6 class="dropdown-header">{{ _('Cover') }}</h6></li>
+                    <li>
+                        {% call dropdown_form_button(download_cover_form, url_for("library.books.cover_download", book_id=book.book_id)) %}
+                            <i class="bi bi-download me-2"></i>{{ _('Download Cover') }}
+                        {% endcall %}
+                    </li>
+                    <li>
+                        {% call dropdown_form_button(delete_cover_form, url_for("library.books.cover_delete", book_id=book.book_id), class_='text-danger') %}
+                            <i class="bi bi-trash me-2"></i>{{ _('Delete Cover') }}
+                        {% endcall %}
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        {{ delete_form_modal_button(_("Delete Book"), "book", "dropdown-item") }}
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        {{ debug_collapse_button("dropdown-item") }}
+                    </li>
+                {% endcall %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-2 mb-3">
+                <img class="img-fluid d-block mx-auto"
+                        {% if book.cover %}
+                     src="{{ url_for("library.static", filename=book.cover) }}"
+                        {% else %}
+                     src="https://placehold.co/400x600?text={{ book.title | replace(' ', '+') }}"
+                        {% endif %}
+                     alt="Book cover"
+                     style="width:200px; aspect-ratio:6/9">
+            </div>
+            <div class="col-12 col-lg-8">
+                {% if book.synopsis is not none %}
+                    {% for paragraph in book.synopsis.split("\n") %}
+                        {% if paragraph != "" %}
+                            <p>{{ paragraph }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <tbody>
+                    {{ book_data_table_row(head=_("Release Date"), data=book.release_date | dateformat('dd MMMM YYYY')) }}
+                    {{ book_data_table_row(head=_("Read Status"), data=parse_read_status(book.read_status)) }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {{ debug_collapse(_("Book data"), book.model_dump()) }}
+            </div>
+            <div class="col-12">
+                {{ delete_form_modal(delete_book_form, "book",
+                url_for("library.books.delete_form", book_id=book.book_id), book.title, _('Book')) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

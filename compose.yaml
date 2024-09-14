@@ -1,0 +1,47 @@
+include:
+  - docker/compose.elastic.yml
+
+services:
+
+  pika:
+    build: .
+    environment:
+      FLASK_ENV: production
+
+    depends_on:
+      db:
+        condition: service_healthy
+      es01:
+        condition: service_healthy
+      es02:
+        condition: service_healthy
+      es03:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /application
+    deploy:
+      restart_policy:
+        condition: unless-stopped
+    volumes:
+      - ./pika/library/static/covers:/application/pika/library/static/covers
+      - certs:/application/certs
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Tim123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./pika_dbs.sql:/docker-entrypoint-initdb.d/dump.sql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 1s
+      retries: 20
+
+volumes:
+  db_data:

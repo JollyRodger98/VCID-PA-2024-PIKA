@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block body %}
+    <div class="container h-100 align-content-center">
+        <div class="row">
+            <div class="col-12 mb-3 text-center">
+                <h2>{{ title | default('', true) | safe }}</h2>
+                <p>{{ description | safe }}</p>
+                <p><a href="{{ url_for("index") }}">{{ _('Return to Home') }}</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,63 @@
+{% macro footer() %}
+    <footer class="mt-5 text-center text-lg-start bg-body-tertiary text-muted p-4">
+        <section>
+            <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <img src="{{ url_for("static", filename="img/brand.png") }}" height=40 alt="Pika Brand">
+                            PIKA
+                        </h6>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">{{ _('Library') }}</h6>
+                        <p><a class="text-reset text-decoration-none"
+                              href="{{ url_for("library.books.index") }}">{{ _('Books') }}</a></p>
+                        <p><a class="text-reset text-decoration-none"
+                              href="{{ url_for("library.series.index") }}">{{ ngettext('Series', 'Series', 2) }}</a></p>
+                        <p><a class="text-reset text-decoration-none"
+                              href="{{ url_for("library.authors.index") }}">{{ _('Authors') }}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">{{ _('Community') }}</h6>
+                        <p><a class="text-reset text-decoration-none"
+                              href="{{ url_for("community.index") }}">{{ _('Overview') }}</a></p>
+                        <p><a class="text-reset text-decoration-none"
+                              href="{{ url_for("community.faq_page") }}">{{ _('FAQ') }}</a>
+                        <p><a class="text-reset text-decoration-none"
+                              href="{{ url_for("community.contact") }}">{{ _('Contact') }}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">{{ _('Contact') }} & {{ _('Support') }}</h6>
+                        <p><i class="bi bi-envelope-fill me-3"></i>tim.waldesbuehl1@student.ipso.ch</p>
+                        <p><i class="bi bi-calendar-day me-3"></i>{{ _('Monday') }} - {{ _('Friday') }}</p>
+                        <p><i class="bi bi-clock me-3"></i>09:00 - 16:00</p>
+                        <div class="dropup">
+                            <a class="text-reset text-decoration-none dropdown-toggle" href="#"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="bi bi-globe-europe-africa me-3"></i>{{ _('Languages') }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ url_for('language', lang='en_CH') }}">{{ _('English (Switzerland)') }}</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ url_for('language', lang='en_US') }}">{{ _('English (USA)') }}</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ url_for('language', lang='de_CH') }}">{{ _('German') }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+{% endmacro %}

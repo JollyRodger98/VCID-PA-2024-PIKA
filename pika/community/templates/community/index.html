@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% from "components/jumbotron/jumbotron.html" import jumbotron, jumbotron_section %}
+{% from "community/macros.html" import threads_table %}
+
+{% block title %}{{ _('Community') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h2>{{ _('Community') }}</h2>
+            </div>
+            <div class="col-12">
+
+                {% call jumbotron(_("Threads")) %}
+                    {% call jumbotron_section(_("Popular Threads")) %}
+                        {{ threads_table(popular_threads) }}
+                    {% endcall %}
+                    {% call jumbotron_section(_("Active Threads")) %}
+                        {{ threads_table(active_threads) }}
+                    {% endcall %}
+                    {% call jumbotron_section(_("New Threads")) %}
+                        {{ threads_table(new_threads, date_type="created") }}
+                    {% endcall %}
+                {% endcall %}
+
+                {% call jumbotron(_("Info Center")) %}
+                    {% call jumbotron_section(_("Active Users")) %}
+                            {% for user in all_users %}
+                                <a class="link-body-emphasis icon-link"
+                                   href="{{ url_for("community.profile", username=user) }}">
+                                    <i class="bi bi-person align-content-center"></i> {{ user }}
+                                </a>
+                                <br>
+                            {% endfor %}
+                    {% endcall %}
+                    {% call jumbotron_section(_("Frequently Asked Questions")) %}
+                        <a class="icon-link icon-link-hover" href="{{ url_for("community.faq_page") }}">
+                            FAQ <i class="bi bi-arrow-right align-content-center"></i>
+                        </a>
+                    {% endcall %}
+                {% endcall %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

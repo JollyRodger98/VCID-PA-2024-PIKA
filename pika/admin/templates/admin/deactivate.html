@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Deactivate Account') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ _('Deactivate Account') }}</h1>
+            </div>
+            <div class="col-12">
+                <p>
+                    {{ _('Are you sure you wish to deactivate the account <span class="fw-bolder">%(current_username)s (%(current_email)s)</span>?', current_username=current_user.username, current_email=current_user.email) }}
+                </p>
+                <button class="btn btn-primary" onclick="history.back()">{{ _('Cancel') }}</button>
+                <a role="button" class="btn btn-danger" href="{{ url_for("auth.deactivate") }}">{{ _('Deactivate Account') }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

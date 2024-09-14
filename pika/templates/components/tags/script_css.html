@@ -1,0 +1,20 @@
+{%- macro link_tag(href, rel="stylesheet", integrity=None, cross_origin="anonymous") -%}
+    <link
+            rel="{{ rel }}"
+            crossorigin="{{ cross_origin }}"
+            href="{{ href }}"
+            {%- if integrity -%}
+            integrity="{{ integrity }}"
+            {%- endif -%}
+    >
+{%- endmacro -%}
+
+{%- macro script_tag(src, integrity=None, cross_origin="anonymous") -%}
+    <script
+            crossorigin="{{ cross_origin }}"
+            src="{{ src }}"
+            {%- if integrity -%}
+            integrity="{{ integrity }}"
+            {%- endif -%}
+    ></script>
+{%- endmacro -%}

@@ -1,0 +1,133 @@
+{% macro nav_item(label, href, active) %}
+    <li class="nav-item">
+        <a class="nav-link{% if active %} active{% endif %}"
+           href="{{ href }}"
+           {% if active %}aria-current="page" {% endif %}
+        >
+            {{ _(label) }}
+        </a>
+    </li>
+{% endmacro %}
+
+{% macro nav_item_dropdown(label, active) %}
+    <li class="nav-item dropdown">
+        <a role="button" class="nav-link dropdown-toggle{% if active %} active{% endif %}"
+           {% if active %}aria-current="page" {% endif %}
+           href="#"
+           data-bs-toggle="dropdown"
+           aria-expanded="false"
+        >
+            {{ _(label) }}
+        </a>
+        <ul class="dropdown-menu">
+            {{- caller() }}
+        </ul>
+    </li>
+{% endmacro %}
+
+{% macro navbar(username, user_is_authenticated, login_form, active_pages) %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-3">
+        <div class="container-fluid">
+            {# Brand image -#}
+            <a class="navbar-brand" href="{{ url_for("index") }}">
+                <img src="{{ url_for("static", filename="img/brand.png") }}" alt="Logo" width="24" height="24"
+                     class="d-inline-block align-text-top">
+                PIKA
+            </a>
+
+            {#- Dropdown button for small screens #}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            {#- Navbar #}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    {#- Home button #}
+                    {{ nav_item("Home", url_for("index"), active_pages["home_active"]) }}
+
+                    {#- Library dropdown button #}
+                    {% call nav_item_dropdown("Library", active_pages["library_active"]) %}
+                        <li><h6 class="dropdown-header">{{ _('Library') }}</h6></li>
+                        <li><a class="dropdown-item" href="{{ url_for("library.books.index") }}">
+                            <i class="bi bi-book"></i> {{ _('Books') }}
+                        </a></li>
+                        <li><a class="dropdown-item" href="{{ url_for("library.series.index") }}">
+                            <i class="bi bi-card-list"></i> {{ ngettext('Series', 'Series', 2) }}
+                        </a></li>
+                        <li><a class="dropdown-item" href="{{ url_for("library.authors.index") }}">
+                            <i class="bi bi-person"></i> {{ _('Authors') }}
+                        </a></li>
+                        <li>
+                            <hr class="dropdown-divider"/>
+                        </li>
+                        <li><h6 class="dropdown-header">{{ _('Actions') }}</h6></li>
+                        <li><a class="dropdown-item" href="{{ url_for("library.books.add_page") }}">
+                            <i class="bi bi-plus-lg"></i> {{ _('New') }}
+                        </a></li>
+                        <li><a class="dropdown-item" href="{{ url_for("library.import_from_goodreads_page") }}">
+                            <i class="bi bi-arrow-down-square"></i> {{ _('Import') }}
+                        </a></li>
+                    {%- endcall %}
+
+                    {{ nav_item("Community", url_for("community.index"), active_pages["community_active"]) }}
+
+
+                </ul>
+                {%- if user_is_authenticated %}
+                    <form class="d-flex me-lg-3 mb-3 mb-lg-0" method="GET" action="{{ url_for("search") }}">
+                        {{ g.search_form.q(size=20, class_="form-control", placeholder=g.search_form.q.label.text) }}
+                    </form>
+                {% endif -%}
+
+                {#- User menu dependant on if the user is logged in -#}
+                {#- Login form in navbar -#}
+                {%- if not user_is_authenticated %}
+                    <form class="d-flex" action="{{ url_for("auth.login_form") }}" method="POST">
+                        {{ login_form.username }}
+                        {{ login_form.password }}
+                        {{ login_form.csrf_token }}
+                        {{ login_form.login }}
+                        <a class="btn btn-outline-primary" href="{{ url_for("auth.register_page") }}" role="button">
+                            {{ _('Register') }}
+                        </a>
+                    </form>
+
+                {#- User menu in navbar -#}
+                {%- elif user_is_authenticated %}
+                    <div class="d-flex align-items-center">
+                        <img src="{{ url_for('icon') }}"
+                             class="img-fluid rounded-5 me-2" alt="User Icon" style="height: 2.5rem; width: auto">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-primary dropdown-toggle border-0 btn-sm py-0" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                                {{ username }}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end ">
+                                <li><h6 class="dropdown-header">{{ _('Profile') }}</h6></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url_for("admin.user.profile.dashboard") }}">
+                                        {{ _('Dashboard') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url_for("admin.user.profile.settings") }}">
+                                        {{ _('Settings') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider"/>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ url_for("auth.logout") }}">{{ _('Logout') }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif -%}
+
+            </div>
+        </div>
+    </nav>
+{% endmacro %}

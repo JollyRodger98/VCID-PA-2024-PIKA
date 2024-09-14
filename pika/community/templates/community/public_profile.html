@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% from "admin/macros.html" import user_data_table_row %}
+
+{% block title %}{{ user.username }}'s {{ _('Profile') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Public Profile</h1>
+            </div>
+            <div class="col-12">
+                <table class="table">
+                    <tbody>
+                    {{ user_data_table_row(_("Username"), user.username) }}
+{#                    {{ user_data_table_row(_("Joined"), user.get_created_at().strftime("%B %Y")) }}#}
+                    {{ user_data_table_row(_("Joined"), user.created_at | datetimeformat(format='MMMM YYYY')) }}
+                    {# {{ user_data_table_row(_("Last Login"), user.get_last_login().strftime("%d %B %Y")) }} #}
+                    {{ user_data_table_row(_("Last Login"), user.last_login | datetimeformat(format='dd MMMM YYYY')) }}
+                    {{ user_data_table_row(_("Posts"), user.posts_count) }}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

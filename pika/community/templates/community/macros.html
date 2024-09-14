@@ -1,0 +1,105 @@
+{% macro thread_link(thread_id, thread_name, class_) %}
+    <a class="{{ class_ }}" href="{{ url_for("community.thread_page", thread_id=thread_id) }}">
+        {{ thread_name }}
+    </a>
+{% endmacro %}
+
+{% macro profile_link(username, class_) %}
+    <a class="{{ class_ }}" href="{{ url_for("community.profile", username=username) }}">{{ username }}</a>
+{% endmacro %}
+
+{% macro threads_table(thread_data, date_type="updated") %}
+    {% set table_content = False %}
+    {% if thread_data is undefined or thread_data|length is eq 0 %}
+        {% set table_content = True %}
+    {% endif %}
+    {% if date_type is eq "updated" %}
+        {% set date_col_head = _("Last Activity") %}
+    {% elif date_type is eq "created" %}
+        {% set date_col_head = _("Created") %}
+    {% endif %}
+    <table class="table table-secondary table-striped table-bordered{{ " table-hover" if table_content is false }} m-0">
+        <thead>
+        <tr class="table-primary">
+            <th class="w-50" scope="col">{{ _('Title') }}</th>
+            <th style="width: 10%" scope="col">{{ _('Posts') }}</th>
+            <th style="width: 10%" scope="col">{{ _('Views') }}</th>
+            <th style="width: 20%" scope="col">{{ date_col_head }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if table_content is true %}
+            <tr>
+                <td colspan="4" class="text-center"><span class="fst-italic">{{ _('None') }}</span></td>
+            </tr>
+        {% endif %}
+        {% for thread in thread_data %}
+            <tr class="position-relative">
+                <td>{{ thread_link(thread.thread_id, thread.title, "text-decoration-none text-reset stretched-link") }}</td>
+                <td>{{ thread.post_count }}</td>
+                <td>{{ thread.views }}</td>
+                {% if date_type is eq "updated" %}
+{#                    <td>{{ thread.get_last_updated().strftime("%d.%m.%Y %H:%M") }}</td>#}
+                    <td>{{ thread.created | datetimeformat }}</td>
+                {% elif date_type is eq "created" %}
+{#                    <td>{{ thread.get_created_at().strftime("%d.%m.%Y %H:%M") }}</td>#}
+                    <td>{{ thread.created | datetimeformat }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}
+
+{% macro post_card(index_nr, post, edit_button=False) %}
+    <div class="col">
+        <div class="card" id="post-{{ index_nr }}">
+            <div class="card-header text-muted small">
+                <div class="d-inline">{{ _('Posted') }}
+                    {{ _('by') }} {{ profile_link(post.author.username, "text-reset") }}</div>
+                <div class="d-inline float-end">#{{ index_nr }}</div>
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    {{ post.content }}
+                </div>
+            </div>
+            <div class="card-footer text-body-secondary small">
+                <div class="d-inline">
+                    {{ post.created | datetimeformat }}
+                </div>
+                {% if edit_button is true %}
+                    <div class="d-inline float-end">
+                        <button type="button" class="btn btn-outline-primary btn-sm py-0" data-bs-toggle="modal"
+                                data-bs-target="#postEditModal" data-bs-post-id="{{ post.post_id }}">
+                            <i class="bi bi-pencil-fill"></i>
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro accordion(id) %}
+    <div class="accordion" id="{{ id }}">
+        {{ caller() }}
+    </div>
+{% endmacro %}
+
+{% macro accordion_item(parent_id, id, title, active=False) %}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button{{ " collapsed" if not active }}" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#{{ id }}" aria-expanded="{{ active | lower }}" aria-controls="{{ id }}">
+                <strong>{{ title }}</strong>
+            </button>
+        </h2>
+        <div id="{{ id }}" class="accordion-collapse collapse{{ " show" if active }}"
+             data-bs-parent="#{{ parent_id }}">
+            <div class="accordion-body">
+                {{ caller() }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}

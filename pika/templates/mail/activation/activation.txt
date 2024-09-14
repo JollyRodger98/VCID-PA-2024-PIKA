@@ -1,0 +1,5 @@
+Hi, {{ username }}
+
+To complete your registration click or copy the link below.
+
+{{ url_for('auth.activate', token=token, _external=true) }}

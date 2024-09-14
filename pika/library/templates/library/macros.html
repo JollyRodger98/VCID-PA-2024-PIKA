@@ -1,0 +1,202 @@
+{# Links #}
+{% macro book_link(book_id, title, class_) %}
+    {% if class_ is not defined %}
+        {% set class_ = "link-dark text-muted link-underline-opacity-0 link-underline-opacity-100-hover" %}
+    {% endif %}
+    <a href="{{ url_for("library.books.details", book_id=book_id) }}"
+       class="{{ class_ }}">
+        {{ title }}
+    </a>
+{% endmacro %}
+
+{% macro series_link(series, volume_nr=None) %}
+    {% if series %}
+        <a href="{{ url_for("library.series.details", series_id=series.series_id) }}"
+           class="link-dark text-muted link-underline-opacity-0 link-underline-opacity-100-hover">
+            {% if volume_nr %}
+                {{ series.title }} #{{ volume_nr }}
+            {% else %}
+                {{ series.title }}
+            {% endif %}
+        </a>
+    {% endif %}
+{% endmacro %}
+
+{% macro author_link(author) %}
+    <a href="{{ url_for("library.authors.details", author_id=author.author_id) }}"
+       class="link-dark text-muted link-underline-opacity-0 link-underline-opacity-100-hover">
+        {{ author.full_name }}
+    </a>
+{% endmacro %}y
+
+{% macro author_link_list(authors) %}
+    {% for author in authors %}
+        {{ author_link(author) }}
+        {{ "," if loop.last is false }}
+    {% endfor %}
+{% endmacro %}
+
+
+{# Tables #}
+{% macro books_table_row(book_id, title, series, volume_nr, authors) %}
+    <tr>
+        <td style="width: 33.33%">{{ book_link(book_id, title) }}</td>
+        <td style="width: 33.33%">{{ series_link(series, volume_nr) }}</td>
+        <td style="width: 33.33%">{{ author_link_list(authors) }}</td>
+    </tr>
+{% endmacro %}
+
+{% macro series_table_row(series) %}
+    <tr class="position-relative">
+        <td>
+            <a class="stretched-link"
+               href="{{ url_for("library.series.details", series_id=series.series_id) }}"></a>
+            {{ series.title }}
+        </td>
+    </tr>
+{% endmacro %}
+
+{% macro author_table_row(author) %}
+    <tr class="position-relative">
+        <td>
+            <a class="stretched-link"
+               href="{{ url_for("library.authors.details", author_id=author.author_id) }}"></a>
+            {{ author.last_name }}
+        </td>
+        <td>{{ author.first_name or "" }}</td>
+    </tr>
+{% endmacro %}
+
+{% macro book_data_table_row(head, data) %}
+    <tr>
+        <th scope="row" class="w-50">{{ head }}</th>
+        <td>{{ data }}</td>
+    </tr>
+{% endmacro %}
+
+{% macro series_books_table_row(book_id, title, authors, volume_nr) %}
+    <tr>
+        <td style="width: 45%">{{ book_link(book_id, title) }}</td>
+        <td style="width: 45%">{{ author_link_list(authors) }}</td>
+        <td style="width: 10%">{% if volume_nr %}#{{ volume_nr }}{% endif %}</td>
+    </tr>
+{% endmacro %}
+
+{% macro author_books_table_row(book_id, title, series, volume_nr) %}
+    <tr>
+        <td style="width: 50%">{{ book_link(book_id, title) }}</td>
+        <td style="width: 50%">{{ series_link(series, volume_nr) }}</td>
+    </tr>
+{% endmacro %}
+
+
+{# Utility #}
+{% macro parse_read_status(read_status) %}
+    {% if read_status is true %}
+        <i class="bi bi-check-lg"></i>
+    {% elif read_status is false %}
+        <i class="bi bi-x-lg"></i>
+    {% endif %}
+{% endmacro %}
+
+
+{# Navigation #}
+{% macro add_pages_navbar(active_page) %}
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+            <a class="nav-link{{ " active" if active_page == "books" }}" {{ "aria-current=page" if active_page == "books" }}
+               href="{{ url_for("library.books.add_page") }}"><i class="bi bi-book me-2"></i>{{ _('Books') }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{{ " active" if active_page == "series" }}" {{ "aria-current=page" if active_page == "series" }}
+               href="{{ url_for("library.series.add_page") }}"><i class="bi bi-card-list me-2"></i>{{ ngettext('Series', 'Series', 2) }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{{ " active" if active_page == "authors" }}" {{ "aria-current=page" if active_page == "authors" }}
+               href="{{ url_for("library.authors.add_page") }}"><i class="bi bi-person me-2"></i>{{ _('Authors') }}</a>
+        </li>
+    </ul>
+{% endmacro %}
+
+{% macro library_pages_navbar(active_page) %}
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+            <a class="nav-link{{ " active" if active_page == "books" }}" {{ "aria-current=page" if active_page == "books" }}
+               href="{{ url_for("library.books.index") }}"><i class="bi bi-book"></i> {{ _('Books') }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{{ " active" if active_page == "series" }}" {{ "aria-current=page" if active_page == "series" }}
+               href="{{ url_for("library.series.index") }}"><i class="bi bi-card-list"></i> {{ ngettext('Series', 'Series', 2) }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{{ " active" if active_page == "authors" }}" {{ "aria-current=page" if active_page == "authors" }}
+               href="{{ url_for("library.authors.index") }}"><i class="bi bi-person"></i> {{ _('Authors') }}</a>
+        </li>
+    </ul>
+{% endmacro %}
+
+{% macro pagination_nav(page_list, current_page, last_page, endpoint) %}
+    <nav aria-label="Pagination">
+        <ul class="pagination">
+            <li class="page-item{{ " disabled" if current_page is eq 1 }}">
+                <a class="page-link" href="{{ url_for(endpoint, page=current_page - 1) }}"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% for page in page_list %}
+                {% if page is eq "." %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">
+                            …
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item{{ " active" if current_page is eq page }}">
+                        <a class="page-link" href="{{ url_for(endpoint, page=page) }}">
+                            {{ page }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item{{ " disabled" if current_page is eq last_page }}">
+                <a class="page-link" href="{{ url_for(endpoint, page=current_page + 1) }}"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endmacro %}
+
+{# Dropdowns #}
+{% macro edit_dropdown(edit_endpoint) %}
+    <div class="btn-group ms-auto">
+        <a role="button"
+           class="btn btn-secondary"
+           href="{{ edit_endpoint }}">
+            {{ _('Edit') }}<i class="bi bi-pencil-square ms-2"></i>
+        </a>
+        <button type="button"
+                class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+            <span class="visually-hidden">Edit Dropdown Toggle</span>
+        </button>
+        <ul class="dropdown-menu">
+            {{ caller() }}
+        </ul>
+    </div>
+{% endmacro %}
+
+{% macro dropdown_form_button(form, endpoint, class_) %}
+    <form method="post"
+          action="{{ endpoint }}"
+    >
+        {{ form.csrf_token }}
+        <button class="dropdown-item {{ class_ }}" type="submit">
+            {{ caller() }}
+        </button>
+    </form>
+{% endmacro %}
+

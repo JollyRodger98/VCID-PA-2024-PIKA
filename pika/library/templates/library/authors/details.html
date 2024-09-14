@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% from "library/macros.html" import author_books_table_row, edit_dropdown %}
+{% from "components/collapse/debug/collapse.html" import debug_collapse %}
+{% from "components/collapse/debug/collapse_button.html" import debug_collapse_button %}
+{% from "components/modal/delete/modal.html" import delete_form_modal %}
+{% from "components/modal/delete/button.html" import delete_form_modal_button %}
+
+{% block title %}{{ author.full_name }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>{{ author.full_name }}</h1>
+            </div>
+            <div class="col-auto">
+                {% call edit_dropdown(url_for("library.authors.edit_page", author_id=author.author_id)) %}
+                    <li>
+                        {{ delete_form_modal_button(_("Delete Author"), "author", "dropdown-item") }}
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        {{ debug_collapse_button("dropdown-item") }}
+                    </li>
+
+                {% endcall %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ _('Title') }}</th>
+                        <th scope="col">{{ ngettext('Series', 'Series', 1) }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for book in author.books %}
+                        {{ author_books_table_row(book.book_id, book.title, book.series, book.volume_nr_as_string) }}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {{ debug_collapse(_("Author data"), author) }}
+            </div>
+            <div class="col-12">
+                {{ delete_form_modal(delete_author_form, "author",
+                url_for("library.authors.delete_form", author_id=author.author_id), author.full_name, _('Author')) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

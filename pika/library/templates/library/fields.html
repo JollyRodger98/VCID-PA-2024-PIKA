@@ -1,0 +1,25 @@
+{% from "components/forms/fields.html" import default_input, check_input, grid_field %}
+
+{% macro _volume_nr_input(field) %}
+    {{ field.label(class_="form-label") }}
+    <div class="input-group">
+        <span class="input-group-text" id="volume-nr-addon">#</span>
+        {{ field(aria_describedby="volume-nr-addon") }}
+    </div>
+{% endmacro %}
+
+{% macro _parse_input_type(field) %}
+    {% if field.type is eq "BooleanField" %}
+        {{ check_input(field) }}
+    {% elif field.type is eq "IntegerField" and field.name is eq "volume_nr" %}
+        {{ _volume_nr_input(field) }}
+    {% else %}
+        {{ default_input(field) }}
+    {% endif %}
+{% endmacro %}
+
+{% macro book_form_field(field, col_size) %}
+    {% call grid_field(col_size) %}
+        {{ _parse_input_type(field) }}
+    {% endcall %}
+{% endmacro %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Contact') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-12">
+                <h2>{{ _('Contact') }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <form action="{{ url_for("community.contact_form") }}" method="POST" target="_blank">
+                    <div class="mb-3">
+                        {{ form.email.label(class_="form-label") }}
+                        {{ form.email }}
+                        <div class="form-text">
+                            {{ _('If you are sending the message from a different address as your account, please specify your account email address in the message.') }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.subject.label(class_="form-label") }}
+                        {{ form.subject }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.message.label(class_="form-label") }}
+                        {{ form.message }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.hidden_tag() }}
+                        {{ form.send }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

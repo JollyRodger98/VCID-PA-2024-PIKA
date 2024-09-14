@@ -1,0 +1,796 @@
+# German translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-05-30 20:09+0200\n"
+"PO-Revision-Date: 2024-05-29 12:52+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.15.0\n"
+
+#: pika/forms.py:11
+msgid "Search"
+msgstr "Suchen"
+
+#: pika/setup.py:58
+msgid "Please log in to access this page."
+msgstr "Bitte melden Sie sich an, um auf diese Seite zuzugreifen."
+
+#: pika/admin/templates/admin/accounts.html:4
+#: pika/admin/templates/admin/accounts.html:10
+#: pika/admin/templates/admin/navigation.html:53
+msgid "Accounts"
+msgstr "Konten"
+
+#: pika/admin/templates/admin/accounts.html:23
+msgid "ID"
+msgstr "ID"
+
+#: pika/admin/templates/admin/accounts.html:24
+#: pika/admin/templates/admin/dashboard.html:23
+#: pika/admin/templates/admin/users.html:62 pika/auth/forms.py:9
+#: pika/auth/forms.py:10 pika/auth/forms.py:20 pika/auth/forms.py:21
+#: pika/community/templates/community/public_profile.html:15
+msgid "Username"
+msgstr "Benutzername"
+
+#: pika/admin/templates/admin/accounts.html:25
+msgid "Enable/Disable"
+msgstr "Aktivieren/Deaktivieren"
+
+#: pika/admin/templates/admin/accounts.html:26
+msgid "Activation E-Mail"
+msgstr "Aktivierungs-E-Mail"
+
+#: pika/admin/templates/admin/accounts.html:60 pika/community/forms.py:26
+msgid "Send"
+msgstr "Senden"
+
+#: pika/admin/templates/admin/dashboard.html:5
+#: pika/admin/templates/admin/dashboard.html:11
+#: pika/admin/templates/admin/navigation.html:10
+#: pika/templates/components/navbar/navbar.html:113
+msgid "Dashboard"
+msgstr "Übersicht"
+
+#: pika/admin/templates/admin/dashboard.html:24
+#: pika/admin/templates/admin/settings.html:25
+msgid "First-/Lastname"
+msgstr "Vor-/Nachname"
+
+#: pika/admin/templates/admin/dashboard.html:25 pika/auth/forms.py:12
+#: pika/auth/forms.py:13 pika/auth/forms.py:26 pika/auth/forms.py:27
+msgid "Password"
+msgstr "Passwort"
+
+#: pika/admin/templates/admin/dashboard.html:26
+#: pika/admin/templates/admin/settings.html:35
+#: pika/admin/templates/admin/users.html:63 pika/admin/user/edit/forms.py:14
+#: pika/auth/forms.py:23 pika/auth/forms.py:24
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: pika/admin/templates/admin/dashboard.html:27
+#: pika/admin/templates/admin/users.html:64
+#: pika/community/templates/community/public_profile.html:19
+msgid "Last Login"
+msgstr "Letzte Anmeldung"
+
+#: pika/admin/templates/admin/dashboard.html:28
+#: pika/admin/templates/admin/users.html:65
+msgid "Account Created"
+msgstr "Konto erstellt"
+
+#: pika/admin/templates/admin/deactivate.html:3
+#: pika/admin/templates/admin/deactivate.html:9
+#: pika/admin/templates/admin/deactivate.html:16
+#: pika/admin/templates/admin/settings.html:49
+msgid "Deactivate Account"
+msgstr "Konto deaktivieren"
+
+#: pika/admin/templates/admin/deactivate.html:13
+#, python-format
+msgid ""
+"Are you sure you wish to deactivate the account <span class=\"fw-"
+"bolder\">%(current_username)s (%(current_email)s)</span>?"
+msgstr ""
+"Möchten Sie das Konto  <span class=\"fw-bolder\">%(current_username)s "
+"(%(current_email)s)</span> wirklich deaktivieren?"
+
+#: pika/admin/templates/admin/deactivate.html:15
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: pika/admin/templates/admin/navigation.html:20
+#: pika/admin/templates/admin/settings.html:4
+#: pika/admin/templates/admin/settings.html:10
+#: pika/templates/components/navbar/navbar.html:118
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: pika/admin/templates/admin/navigation.html:31
+#: pika/admin/templates/admin/users.html:40
+#: pika/admin/templates/admin/users.html:46
+msgid "Users"
+msgstr "Benutzer"
+
+#: pika/admin/templates/admin/navigation.html:43
+#: pika/admin/templates/admin/roles.html:4
+#: pika/admin/templates/admin/roles.html:10
+msgid "Roles"
+msgstr "Rollen"
+
+#: pika/admin/templates/admin/roles.html:23
+msgid "User"
+msgstr "Benutzer"
+
+#: pika/admin/templates/admin/roles.html:23
+msgid "Role"
+msgstr "Rollen"
+
+#: pika/admin/templates/admin/settings.html:20
+msgid "Profile Settings"
+msgstr "Profil Einstellungen"
+
+#: pika/admin/templates/admin/settings.html:30 pika/admin/user/edit/forms.py:23
+msgid "New Password"
+msgstr "Neues Passwort"
+
+#: pika/admin/templates/admin/settings.html:40
+msgid "Account Settings"
+msgstr "Konto Einstellungen"
+
+#: pika/admin/templates/admin/settings.html:42
+msgid "Warning"
+msgstr "Warnung"
+
+#: pika/admin/templates/admin/settings.html:43
+msgid "To reactivate your account, the site administration needs to be contacted."
+msgstr "Dein Konto kann nur durch einen Administrator reaktiviert werden."
+
+#: pika/admin/templates/admin/users.html:10
+#, python-format
+msgid "%(num)s day ago"
+msgid_plural "%(num)s days ago"
+msgstr[0] "vor einem Tag"
+msgstr[1] "vor %(num)s Tagen"
+
+#: pika/admin/templates/admin/users.html:18
+#, python-format
+msgid "%(num)s hour ago"
+msgid_plural "%(num)s hours ago"
+msgstr[0] "vor einer Stunde"
+msgstr[1] "vor %(num)s Stunden"
+
+#: pika/admin/templates/admin/users.html:25
+#, python-format
+msgid "%(num)s minute ago"
+msgid_plural "%(num)s minutes ago"
+msgstr[0] "vor einer Minute"
+msgstr[1] "vor %(num)s Minuten"
+
+#: pika/admin/templates/admin/users.html:60
+msgid "Active"
+msgstr "Aktiv"
+
+#: pika/admin/templates/admin/users.html:61
+msgid "Name"
+msgstr "Name"
+
+#: pika/admin/templates/admin/users.html:66
+msgid "Token"
+msgstr "Token"
+
+#: pika/admin/templates/admin/users.html:89
+msgid "Copy"
+msgstr "Kopieren"
+
+#: pika/admin/templates/admin/users.html:105
+msgid "Renew"
+msgstr "Erneuern"
+
+#: pika/admin/templates/admin/users.html:116
+msgid "Revoke"
+msgstr "Wiederrufen"
+
+#: pika/admin/templates/admin/edit/email.html:7
+msgid "Edit E-Mail"
+msgstr "E-Mail Bearbeiten"
+
+#: pika/admin/templates/admin/edit/name.html:7
+msgid "Edit First-/Lastname"
+msgstr "Vor-/Nachname Bearbeiten"
+
+#: pika/admin/templates/admin/edit/password.html:7
+msgid "Set New Password"
+msgstr "Neues Passwort setzen"
+
+#: pika/admin/user/edit/forms.py:7 pika/library/forms.py:120
+#: pika/library/forms.py:128
+#: pika/library/templates/library/authors/index.html:30
+msgid "First Name"
+msgstr "Vorname"
+
+#: pika/admin/user/edit/forms.py:8
+#: pika/library/templates/library/authors/index.html:29
+msgid "Last Name"
+msgstr "Nachname"
+
+#: pika/admin/user/edit/forms.py:9 pika/admin/user/edit/forms.py:15
+#: pika/admin/user/edit/forms.py:29
+msgid "Save"
+msgstr "Speichern"
+
+#: pika/admin/user/edit/forms.py:20
+msgid "Old Password"
+msgstr "Altes Passwort"
+
+#: pika/admin/user/edit/forms.py:26
+msgid "Confirm New Password"
+msgstr "Neues Passwort bestätigen"
+
+#: pika/auth/forms.py:15
+msgid "Login"
+msgstr "Anmelden"
+
+#: pika/auth/forms.py:29 pika/auth/forms.py:30
+msgid "Confirm Password"
+msgstr "Passwort bestätigen"
+
+#: pika/auth/forms.py:32 pika/templates/components/navbar/navbar.html:95
+msgid "Register"
+msgstr "Registrieren"
+
+#: pika/auth/routes.py:35
+msgid "That username is taken. Please choose another one."
+msgstr "Dieser Benutzername ist vergeben. Bitte wählen Sie einen anderen."
+
+#: pika/auth/routes.py:40
+msgid "That E-Mail is already in use. Please use another one."
+msgstr "Diese E-Mail wird bereits verwendet. Bitte verwenden Sie eine andere."
+
+#: pika/auth/routes.py:44
+msgid "Passwords don't match."
+msgstr "Passwörter sind nicht identisch."
+
+#: pika/auth/routes.py:63
+msgid "Activate PIKA Account"
+msgstr "PIKA Konto aktivieren"
+
+#: pika/auth/routes.py:68
+msgid "Your account has been created"
+msgstr "Ihr Konto wurde erstellt"
+
+#: pika/auth/routes.py:95
+msgid "Invalid username or password"
+msgstr "Ungültiger Benutzername oder Passwort"
+
+#: pika/auth/routes.py:112
+msgid "You have been logged out."
+msgstr "Sie wurden abgemeldet."
+
+#: pika/auth/routes.py:123 pika/templates/mail/activation/activation.html:6
+msgid "Activate Account"
+msgstr "Konto aktivieren"
+
+#: pika/auth/routes.py:124
+msgid "Token Expired"
+msgstr "Token Abgelaufen"
+
+#: pika/auth/routes.py:125
+msgid ""
+"The link to activate your account has expired. To resend an activation "
+"email please contact the site administration."
+msgstr ""
+"Der Link zur Aktivierung Ihres Kontos ist abgelaufen. Um eine erneute "
+"Aktivierungs-E-Mail zu senden, wenden Sie sich bitte an die "
+"Administration."
+
+#: pika/auth/routes.py:133
+msgid "Your account has been activated"
+msgstr "Ihr Konto wurde aktiviert"
+
+#: pika/community/forms.py:10
+msgid "Content"
+msgstr "Inhalt"
+
+#: pika/community/forms.py:11
+msgid "Post"
+msgstr "Beitragen"
+
+#: pika/community/forms.py:22
+msgid "Subject"
+msgstr "Betreff"
+
+#: pika/community/forms.py:23
+msgid "Message"
+msgstr "Nachricht"
+
+#: pika/community/forms.py:24
+msgid "Sender Email"
+msgstr "Absender E-Mail"
+
+#: pika/community/templates/community/contact.html:3
+#: pika/community/templates/community/contact.html:9
+#: pika/templates/components/footer/footer.html:29
+#: pika/templates/components/footer/footer.html:33
+msgid "Contact"
+msgstr "Kontakt"
+
+#: pika/community/templates/community/contact.html:19
+msgid ""
+"If you are sending the message from a different address as your account, "
+"please specify your account email address in the message."
+msgstr ""
+"Wenn Sie die Nachricht von einer anderen Adresse als Ihrem Konto senden, "
+"geben Sie in der Nachricht bitte die E-Mail-Adresse Ihres Kontos an."
+
+#: pika/community/templates/community/faq.html:4
+#: pika/templates/components/footer/footer.html:27
+msgid "FAQ"
+msgstr "FAQ"
+
+#: pika/community/templates/community/faq.html:10
+#: pika/community/templates/community/index.html:37
+msgid "Frequently Asked Questions"
+msgstr "Häufig gestellte Fragen (FAQ)"
+
+#: pika/community/templates/community/index.html:5
+#: pika/community/templates/community/index.html:11
+#: pika/templates/components/footer/footer.html:23
+msgid "Community"
+msgstr "Community"
+
+#: pika/community/templates/community/index.html:15
+msgid "Threads"
+msgstr "Threads"
+
+#: pika/community/templates/community/index.html:16
+msgid "Popular Threads"
+msgstr "Beliebte Threads"
+
+#: pika/community/templates/community/index.html:19
+msgid "Active Threads"
+msgstr "Aktive Threads"
+
+#: pika/community/templates/community/index.html:22
+msgid "New Threads"
+msgstr "Neue Threads"
+
+#: pika/community/templates/community/index.html:27
+msgid "Info Center"
+msgstr "Infozentrum"
+
+#: pika/community/templates/community/index.html:28
+msgid "Active Users"
+msgstr "Aktive Benutzer"
+
+#: pika/community/templates/community/macros.html:17
+msgid "Last Activity"
+msgstr "Letzte Aktivität"
+
+#: pika/community/templates/community/macros.html:19
+msgid "Created"
+msgstr "Erstellt"
+
+#: pika/community/templates/community/macros.html:24
+#: pika/library/templates/library/authors/details.html:36
+#: pika/library/templates/library/books/index.html:29
+#: pika/library/templates/library/series/details.html:36
+#: pika/library/templates/library/series/index.html:29
+msgid "Title"
+msgstr "Titel"
+
+#: pika/community/templates/community/macros.html:25
+#: pika/community/templates/community/public_profile.html:20
+msgid "Posts"
+msgstr "Beiträge"
+
+#: pika/community/templates/community/macros.html:26
+msgid "Views"
+msgstr "Besucher"
+
+#: pika/community/templates/community/macros.html:33
+msgid "None"
+msgstr "Keine"
+
+#: pika/community/templates/community/macros.html:58
+msgid "Posted"
+msgstr "Beigetragen"
+
+#: pika/community/templates/community/macros.html:59
+#: pika/library/templates/library/books/details.html:16
+msgid "by"
+msgstr "von"
+
+#: pika/community/templates/community/public_profile.html:4
+#: pika/templates/components/navbar/navbar.html:110
+msgid "Profile"
+msgstr "Profil"
+
+#: pika/community/templates/community/public_profile.html:17
+msgid "Joined"
+msgstr "Beigetreten"
+
+#: pika/community/templates/community/thread.html:26
+msgid "There are no posts in this thread yet."
+msgstr "Es gibt noch keine Beiträge in diesem Thread."
+
+#: pika/community/templates/community/thread.html:37
+msgid "Reply to thread"
+msgstr "Auf Thread antworten"
+
+#: pika/community/templates/community/thread.html:45
+msgid "Login to Reply"
+msgstr "Anmelden um zu antworten"
+
+#: pika/community/templates/community/thread.html:54
+msgid "Edit Post"
+msgstr "Beitrag bearbeiten"
+
+#: pika/community/templates/community/thread.html:71
+#: pika/templates/components/modal/delete/modal.html:19
+msgid "Close"
+msgstr "Schliessen"
+
+#: pika/library/authors.py:41
+msgid "This author does not exist."
+msgstr "Dieser Autor existiert nicht."
+
+#: pika/library/authors.py:70
+msgid "Failed to add new author."
+msgstr "Autor konnte nicht hinzugefügt werden."
+
+#: pika/library/authors.py:123 pika/library/books.py:80
+#: pika/library/series.py:115
+msgid "Server Error"
+msgstr "Server Fehler"
+
+#: pika/library/authors.py:147
+msgid "Authors cannot be deleted when books are still assigned to them."
+msgstr ""
+"Autoren können nicht gelöscht werden, wenn ihnen noch Bücher zugeordnet "
+"sind."
+
+#: pika/library/authors.py:151
+msgid "Author was deleted successfully."
+msgstr "Autor wurde erfolgreich gelöscht."
+
+#: pika/library/books.py:51
+msgid "This book does not exist."
+msgstr "Dieses Buch existiert nicht."
+
+#: pika/library/books.py:191 pika/library/books.py:221
+msgid "This book does not have a cover image."
+msgstr "Dieses Buch hat kein Coverbild."
+
+#: pika/library/forms.py:31 pika/library/forms.py:42
+msgid "Choose..."
+msgstr "Auswählen..."
+
+#: pika/library/forms.py:49 pika/library/forms.py:103 pika/library/forms.py:110
+msgid "Title*"
+msgstr "Titel*"
+
+#: pika/library/forms.py:50
+msgid "Author*"
+msgstr "Autor*"
+
+#: pika/library/forms.py:54
+msgid "Volume Number"
+msgstr "Nummer"
+
+#: pika/library/forms.py:56
+msgid "Release Date*"
+msgstr "Erscheinungsdatum*"
+
+#: pika/library/forms.py:57
+msgid "Synopsis"
+msgstr "Zusammenfassung"
+
+#: pika/library/forms.py:58
+#: pika/library/templates/library/books/details.html:72
+msgid "Read Status"
+msgstr "Lesestatus"
+
+#: pika/library/forms.py:59
+msgid "Book Cover*"
+msgstr "Buch Cover"
+
+#: pika/library/forms.py:87 pika/library/forms.py:104 pika/library/forms.py:122
+msgid "Add"
+msgstr "Erstellen"
+
+#: pika/library/forms.py:88 pika/library/forms.py:105 pika/library/forms.py:123
+msgid "Add Next"
+msgstr "Nächstes erstellen"
+
+#: pika/library/forms.py:94 pika/library/forms.py:111 pika/library/forms.py:130
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: pika/library/forms.py:121 pika/library/forms.py:129
+msgid "Last Name*"
+msgstr "Nachname*"
+
+#: pika/library/forms.py:147
+msgid "Import URL*"
+msgstr "URL importieren*"
+
+#: pika/library/forms.py:148 pika/templates/components/navbar/navbar.html:72
+msgid "Import"
+msgstr "Importieren"
+
+#: pika/library/series.py:41
+msgid "This series does not exist."
+msgstr "Diese Serie existiert nicht."
+
+#: pika/library/series.py:68
+msgid "Failed to add new series."
+msgstr "Serie konnte nicht hinzugefügt werden."
+
+#: pika/library/series.py:139
+msgid "Series cannot be deleted when books are still assigned to it."
+msgstr ""
+"Serien können nicht gelöscht werden, wenn ihnen noch Bücher zugeordnet "
+"sind."
+
+#: pika/library/series.py:143
+msgid "Series was deleted successfully."
+msgstr "Serie wurde erfolgreich gelöscht."
+
+#: pika/library/templates/library/goodreads_import.html:10
+msgid "Goodreads Import"
+msgstr "Goodreads import"
+
+#: pika/library/templates/library/books/index.html:4
+#: pika/library/templates/library/books/index.html:15
+#: pika/library/templates/library/books/index.html:20
+#: pika/library/templates/library/macros.html:108
+#: pika/library/templates/library/macros.html:125
+#: pika/templates/components/footer/footer.html:15
+#: pika/templates/components/navbar/navbar.html:56
+#: pika/templates/search.html:28
+msgid "Books"
+msgstr "Bücher"
+
+#: pika/library/templates/library/authors/details.html:37
+#: pika/library/templates/library/books/index.html:30
+#: pika/library/templates/library/macros.html:112
+#: pika/library/templates/library/macros.html:129
+#: pika/library/templates/library/series/details.html:55
+#: pika/library/templates/library/series/index.html:4
+#: pika/library/templates/library/series/index.html:15
+#: pika/library/templates/library/series/index.html:20
+#: pika/templates/components/footer/footer.html:17
+#: pika/templates/components/navbar/navbar.html:59
+#: pika/templates/search.html:44
+msgid "Series"
+msgid_plural "Series"
+msgstr[0] "Serie"
+msgstr[1] "Serien"
+
+#: pika/library/templates/library/authors/index.html:4
+#: pika/library/templates/library/authors/index.html:15
+#: pika/library/templates/library/authors/index.html:20
+#: pika/library/templates/library/macros.html:116
+#: pika/library/templates/library/macros.html:133
+#: pika/library/templates/library/series/details.html:37
+#: pika/templates/components/footer/footer.html:19
+#: pika/templates/components/navbar/navbar.html:62
+#: pika/templates/search.html:60
+msgid "Authors"
+msgstr "Autoren"
+
+#: pika/library/templates/library/macros.html:178
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: pika/library/templates/library/authors/add.html:5
+#: pika/library/templates/library/authors/add.html:14
+msgid "New Author"
+msgstr "Neuer Autor"
+
+#: pika/library/templates/library/authors/details.html:19
+msgid "Delete Author"
+msgstr "Autor löschen"
+
+#: pika/library/templates/library/authors/details.html:50
+msgid "Author data"
+msgstr "Autordaten"
+
+#: pika/library/templates/library/authors/details.html:54
+#: pika/library/templates/library/books/index.html:31
+msgid "Author"
+msgstr "Autor"
+
+#: pika/library/templates/library/authors/edit.html:4
+#: pika/library/templates/library/authors/edit.html:10
+msgid "Edit Author"
+msgstr "Autor Bearbeiten"
+
+#: pika/library/templates/library/books/add.html:5
+#: pika/library/templates/library/books/add.html:14
+msgid "New Book"
+msgstr "Neues Buch"
+
+#: pika/library/templates/library/books/details.html:20
+msgid "Cover"
+msgstr "Buch Cover"
+
+#: pika/library/templates/library/books/details.html:23
+msgid "Download Cover"
+msgstr "Buch Cover herunterladen"
+
+#: pika/library/templates/library/books/details.html:28
+msgid "Delete Cover"
+msgstr "Buch Cover löschen"
+
+#: pika/library/templates/library/books/details.html:35
+msgid "Delete Book"
+msgstr "Buch löschen"
+
+#: pika/library/templates/library/books/details.html:71
+msgid "Release Date"
+msgstr "Erscheinungsdatum"
+
+#: pika/library/templates/library/books/details.html:79
+msgid "Book data"
+msgstr "Buchdaten"
+
+#: pika/library/templates/library/books/details.html:83
+msgid "Book"
+msgstr "Buch"
+
+#: pika/library/templates/library/books/edit.html:4
+#: pika/library/templates/library/books/edit.html:10
+msgid "Edit Book"
+msgstr "Buch bearbeiten"
+
+#: pika/library/templates/library/series/add.html:5
+#: pika/library/templates/library/series/add.html:14
+msgid "New Series"
+msgstr "Neue Serie"
+
+#: pika/library/templates/library/series/details.html:19
+msgid "Delete Series"
+msgstr "Serie löschen"
+
+#: pika/library/templates/library/series/details.html:38
+msgid "Volume Nr."
+msgstr "Nummer"
+
+#: pika/library/templates/library/series/details.html:51
+msgid "Series data"
+msgstr "Seriendaten"
+
+#: pika/library/templates/library/series/edit.html:4
+#: pika/library/templates/library/series/edit.html:10
+msgid "Edit Series"
+msgstr "Serie bearbeiten"
+
+#: pika/templates/index.html:53
+msgid "Released"
+msgstr "Erschienen"
+
+#: pika/templates/index.html:65
+msgid "Previous"
+msgstr "Vorherige"
+
+#: pika/templates/index.html:70
+msgid "Next"
+msgstr "Nächste"
+
+#: pika/templates/search.html:23
+msgid "Search Results"
+msgstr "Such Resultate"
+
+#: pika/templates/search.html:37 pika/templates/search.html:53
+#: pika/templates/search.html:70
+msgid "No Results"
+msgstr "Keine Resultate"
+
+#: pika/templates/components/collapse/debug/collapse_button.html:9
+msgid "Debug"
+msgstr "Debug"
+
+#: pika/templates/components/footer/footer.html:13
+#: pika/templates/components/navbar/navbar.html:54
+msgid "Library"
+msgstr "Bibliothek"
+
+#: pika/templates/components/footer/footer.html:25
+msgid "Overview"
+msgstr "Übersicht"
+
+#: pika/templates/components/footer/footer.html:33
+msgid "Support"
+msgstr "Support"
+
+#: pika/templates/components/footer/footer.html:35
+msgid "Monday"
+msgstr "Montag"
+
+#: pika/templates/components/footer/footer.html:35
+msgid "Friday"
+msgstr "Freitag"
+
+#: pika/templates/components/footer/footer.html:41
+msgid "Languages"
+msgstr "Sprachen"
+
+#: pika/templates/components/footer/footer.html:46
+msgid "English (Switzerland)"
+msgstr "Englisch (Schweiz)"
+
+#: pika/templates/components/footer/footer.html:50
+msgid "English (USA)"
+msgstr "Englisch (USA)"
+
+#: pika/templates/components/footer/footer.html:54
+msgid "German"
+msgstr "Deutsch"
+
+#: pika/templates/components/modal/delete/modal.html:11
+#, python-format
+msgid "Delete %(resource_type)s"
+msgstr "%(resource_type)s Löschen"
+
+#: pika/templates/components/modal/delete/modal.html:16
+#, python-format
+msgid ""
+"Are you sure you wish to delete <span class=\"fw-"
+"bolder\">%(resource_name)s</span>?"
+msgstr ""
+"Möchten Sie <span class=\"fw-bolder\">%(resource_name)s</span> wirklich "
+"löschen?"
+
+#: pika/templates/components/modal/delete/modal.html:23
+msgid "Yes"
+msgstr "Ja"
+
+#: pika/templates/components/navbar/navbar.html:67
+msgid "Actions"
+msgstr "Aktionen"
+
+#: pika/templates/components/navbar/navbar.html:69
+msgid "New"
+msgstr "Neu"
+
+#: pika/templates/components/navbar/navbar.html:124
+msgid "Logout"
+msgstr "Abmelden"
+
+#: pika/templates/errors/401.html:3
+msgid "Unauthorized"
+msgstr "Nicht autorisiert"
+
+#: pika/templates/errors/401.html:11 pika/templates/errors/404.html:11
+#: pika/templates/errors/error.html:11
+msgid "Return to Home"
+msgstr "Zurück zur Homepage"
+
+#: pika/templates/errors/404.html:3
+msgid "Not Found"
+msgstr "Nicht gefunden"
+
+#: pika/templates/mail/activation/activation.html:4
+msgid "Hi"
+msgstr "Hallo"
+
+#: pika/templates/mail/activation/activation.html:5
+msgid "To complete your registration click or copy the link below."
+msgstr ""
+"Um deine registrierung abzuschliessen, klicke oder kopiere den "
+"unterstehenden Link."
+

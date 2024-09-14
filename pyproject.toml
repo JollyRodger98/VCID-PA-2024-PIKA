@@ -1,0 +1,50 @@
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "pika"
+authors = [
+    { name = "Tim Waldesbühl", email = "twaldesbuehl@gmail.com" },
+]
+description = ""
+# readme = "README.md"
+requires-python = ">=3.12"
+version = "1.0.0"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "flask",
+    "flask-login",
+    "flask-wtf",
+    "flask-sqlalchemy",
+    "flask-migrate",
+    "flask-httpauth",
+    "flask-mail",
+    "flask-babel",
+    "pymysql",
+    "pydantic",
+    "pydantic[email]",
+    "cryptography",
+    "requests",
+    "python-dotenv",
+    "asciistuff",
+    "gunicorn",
+    "elasticsearch",
+    "beautifulsoup4",
+    "pytz",
+    "tzlocal",
+    "pyjwt"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pip-tools",
+    "pylint"
+]

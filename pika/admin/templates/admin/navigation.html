@@ -1,0 +1,58 @@
+{% macro navigation(active, user_roles ) %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link{% if active == 'dashboard' %} active{% endif %}"
+               href="{{ url_for("admin.user.profile.dashboard") }}"
+                    {% if active == 'dashboard' %}
+               aria-current="page"
+                    {% endif %}
+            >
+                {{ _('Dashboard') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link{% if active == 'settings' %} active{% endif %}"
+               href="{{ url_for("admin.user.profile.settings") }}"
+                    {% if active == 'settings' %}
+               aria-current="page"
+                    {% endif %}
+            >
+                {{ _('Settings') }}
+            </a>
+        </li>
+        {% if 'admin' in user_roles or 'superuser' in user_roles %}
+            <li class="nav-item">
+                <a class="nav-link{% if active == 'users' %} active{% endif %}"
+                   href="{{ url_for("admin.administrator.users") }}"
+                        {% if active == 'users' %}
+                   aria-current="page"
+                        {% endif %}
+                >
+                    {{ _('Users') }}
+                </a>
+            </li>
+        {% endif %}
+        {% if 'admin' in user_roles %}
+            <li class="nav-item">
+                <a class="nav-link{% if active == 'roles' %} active{% endif %}"
+                   href="{{ url_for("admin.administrator.roles") }}"
+                        {% if active == 'roles' %}
+                   aria-current="page"
+                        {% endif %}
+                >
+                    {{ _('Roles') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{% if active == 'accounts' %} active{% endif %}"
+                   href="{{ url_for("admin.administrator.accounts") }}"
+                        {% if active == 'accounts' %}
+                   aria-current="page"
+                        {% endif %}
+                >
+                    {{ _('Accounts') }}
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+{% endmacro %}

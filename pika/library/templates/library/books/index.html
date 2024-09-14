@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% from "library/macros.html" import books_table_row, library_pages_navbar, pagination_nav %}
+
+{% block title %}{{ _('Books') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                {{ library_pages_navbar(active_page="books") }}
+            </div>
+            <div class="col-12 mb-3">
+                <div class="row">
+                    <div class="col">
+                        <h2><i class="bi bi-book me-2"></i>{{ _('Books') }}</h2>
+                    </div>
+                    <div class="col-auto">
+                        <a role="button" class="btn btn-outline-secondary"
+                           href="{{ url_for("library.books.add_page") }}">
+                            <i class="bi bi-plus-lg me-2"></i>{{ _('Books') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ _('Title') }}</th>
+                        <th scope="col">{{ ngettext('Series', 'Series', 1) }}</th>
+                        <th scope="col">{{ _('Author') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for book in books %}
+                        {{ books_table_row(book.book_id, book.title, book.series, book.volume_nr_as_string, book.authors) }}
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+                {# {{ books_page | safe }} #}
+            </div>
+            <div class="col-12">
+                {{ pagination_nav(pages, current_page, last_page, "library.books.index") }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

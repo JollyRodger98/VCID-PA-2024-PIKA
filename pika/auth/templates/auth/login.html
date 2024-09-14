@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock title %}
+
+{% macro form_field_div() %}
+    <div class="mb-3">
+        {{ caller() }}
+    </div>
+{% endmacro %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h2>Login</h2>
+            </div>
+            <div class="col-12">
+                <form method="POST">
+                    {% call form_field_div() %}
+                        {{ form.username }}
+                    {% endcall %}
+                    {% call form_field_div() %}
+                        {{ form.password }}
+                    {% endcall %}
+                    {% call form_field_div() %}
+                        {{ form.csrf_token }}
+                        {{ form.login }}
+                    {% endcall %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

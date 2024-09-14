@@ -1,0 +1,64 @@
+{% from "library/fields.html" import book_form_field %}
+{% from "components/forms/forms.html" import grid_form %}
+
+{% macro book_form(form, form_type="add") %}
+    <form method="POST"
+          enctype="multipart/form-data"
+          {% if form_type == "add" %}
+              action="{{ url_for("library.books.add_form") }}"
+          {% elif form_type == "edit" %}
+              action="{{ url_for("library.books.edit_form", book_id=form.book_id.data) }}"
+          {% endif %}>
+        <div class="row g-3">
+            {{ book_form_field(form.title, 12) }}
+            {{ book_form_field(form.authors, 6) }}
+            {{ book_form_field(form.series, 6) }}
+            {{ book_form_field(form.release_date, 6) }}
+            {{ book_form_field(form.volume_nr, 6) }}
+            {{ book_form_field(form.synopsis, 12) }}
+            {{ book_form_field(form.read_status, 12) }}
+            {{ book_form_field(form.cover, 12) }}
+            <div class="col-12">
+                {{ form.csrf_token }}
+                {{ form.book_id }}
+                {% if form_type is eq "add" %}
+                    {{ form.add }}
+                    {{ form.add_next }}
+                {% elif form_type is eq "edit" %}
+                    {{ form.update }}
+                {% endif %}
+            </div>
+        </div>
+    </form>
+{% endmacro %}
+
+{% macro series_form(form, form_type="add") %}
+    {% call grid_form() %}
+        {{ book_form_field(form.title, 12) }}
+        <div class="col-12">
+            {{ form.csrf_token }}
+            {% if form_type is eq "add" %}
+                {{ form.add }}
+                {{ form.add_next }}
+            {% elif form_type is eq "edit" %}
+                {{ form.update }}
+            {% endif %}
+        </div>
+    {% endcall %}
+{% endmacro %}
+
+{% macro authors_form(form, form_type="add") %}
+    {% call grid_form() %}
+        {{ book_form_field(form.first_name, 6) }}
+        {{ book_form_field(form.last_name, 6) }}
+        <div class="col-12">
+            {{ form.csrf_token }}
+            {% if form_type is eq "add" %}
+                {{ form.add }}
+                {{ form.add_next }}
+            {% elif form_type is eq "edit" %}
+                {{ form.update }}
+            {% endif %}
+        </div>
+    {% endcall %}
+{% endmacro %}

@@ -1,0 +1,27 @@
+{% macro field() %}
+    <div class="mb-3">
+        {{ caller() }}
+    </div>
+{% endmacro %}
+
+{% macro grid_field(col_size) %}
+    {% set col = "col" %}
+    {% if col_size is defined and (col_size is integer or col_size is eq "auto") %}
+        {% set col = "col-" + col_size|string %}
+    {% endif %}
+    <div class="{{ col }}">
+        {{ caller() }}
+    </div>
+{% endmacro %}
+
+{% macro default_input(field) %}
+    {{ field.label(class_="form-label") }}
+    {{ field }}
+{% endmacro %}
+
+{% macro check_input(field) %}
+    <div class="form-check">
+        {{ field }}
+        {{ field.label(class_="form-check-label") }}
+    </div>
+{% endmacro %}

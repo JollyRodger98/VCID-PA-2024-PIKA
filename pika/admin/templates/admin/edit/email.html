@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>{{ _('Edit E-Mail') }}</h2>
+            </div>
+            <div class="col-12">
+                <form method="POST">
+                    <div class="mb-3">
+                        {{ form.email.label(class_="form-label") }}
+                        {{ form.email(value=email or "") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.csrf_token }}
+                        {{ form.save }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

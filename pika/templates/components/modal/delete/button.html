@@ -1,0 +1,9 @@
+{% macro delete_form_modal_button(label, id, class_) %}
+    <button class="{{ class_ }} text-danger"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#delete{{ id | title }}Modal"
+    >
+        <i class="bi bi-trash me-2"></i>{{ label }}
+    </button>
+{% endmacro %}

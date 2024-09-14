@@ -1,0 +1,4 @@
+services:
+  pika:
+    ports:
+      - "8000:8000"

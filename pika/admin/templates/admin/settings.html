@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% from 'admin/navigation.html' import navigation %}
+
+{% block title %}{{ _('Settings') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ _('Settings') }}</h1>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                {{ navigation('settings', user_roles=current_user.get_roles()) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h3>{{ _('Profile Settings')}}</h3>
+                <div class="list-group mb-2 ">
+                    <a href="{{ url_for("admin.user.edit.name_page") }}"
+                       class="list-group-item list-group-item-action" aria-current="true">
+                        <i class="bi bi-pencil-square"></i>
+                        {{ _('First-/Lastname') }}
+                    </a>
+                    <a href="{{ url_for("admin.user.edit.password_page") }}"
+                       class="list-group-item list-group-item-action">
+                        <i class="bi bi-pencil-square"></i>
+                        {{ _('New Password')}}
+                    </a>
+                    <a href="{{ url_for("admin.user.edit.email_page") }}"
+                       class="list-group-item list-group-item-action">
+                        <i class="bi bi-pencil-square"></i>
+                        {{ _('E-Mail') }}
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <h3>{{ _('Account Settings')}}</h3>
+                <p>
+                    <span class="fw-bolder text-danger">{{ _('Warning') }}: </span>
+                    {{ _('To reactivate your account, the site administration needs to be contacted.')}}
+                </p>
+                <div class="list-group">
+                    <a href="{{ url_for("admin.user.edit.deactivate") }}"
+                       class="list-group-item list-group-item-action list-group-item-danger">
+                        <i class="bi bi-trash"></i>
+                        {{ _('Deactivate Account')}}
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

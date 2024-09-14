@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% from "community/macros.html" import accordion, accordion_item %}
+
+{% block title %}{{ _('FAQ') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h2>{{ _('Frequently Asked Questions') }}</h2>
+            </div>
+            <div class="col">
+                {% call accordion("faq-accordion") %}
+                    {% for question in questions %}
+                        {% call accordion_item("faq-accordion", "question-" + loop.index|string, question.question) %}
+                            {{ question.answer | safe }}
+                        {% endcall %}
+                    {% endfor %}
+                {% endcall %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

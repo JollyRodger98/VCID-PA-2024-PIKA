@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock title %}
+
+{% macro form_field_div() %}
+    <div class="mb-3">
+        {{ caller() }}
+    </div>
+{% endmacro %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h2>Register</h2>
+            </div>
+            <div class="col-12">
+                <form action="{{ url_for("auth.register_form") }}" method="POST">
+                    {% call form_field_div() %}
+                        {{ form.new_username }}
+                    {% endcall %}
+                    {% call form_field_div() %}
+                        {{ form.new_email }}
+                    {% endcall %}
+                    {% call form_field_div() %}
+                        {{ form.new_password }}
+                    {% endcall %}
+                    {% call form_field_div() %}
+                        {{ form.new_confirm_password }}
+                    {% endcall %}
+                    {% call form_field_div() %}
+                        {{ form.csrf_token }}
+                        {{ form.register }}
+                    {% endcall %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "library/forms.html" import authors_form %}
+{% from "library/macros.html" import add_pages_navbar %}
+
+{% block title %}{{ _('New Author') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                {{ add_pages_navbar(active_page="authors") }}
+            </div>
+            <div class="col-12 mb-3">
+                <h2><i class="bi bi-person me-2"></i>{{ _('New Author') }}</h2>
+            </div>
+            <div class="col-12">
+                {{ authors_form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

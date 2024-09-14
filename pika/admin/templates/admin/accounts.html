@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% from 'admin/navigation.html' import navigation %}
+
+{% block title %}{{ _('Accounts') }}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>{{ _('Accounts') }}</h1>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                {{ navigation('accounts', user_roles=current_user.get_roles()) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{ _('ID') }}</th>
+                        <th>{{ _('Username') }}</th>
+                        <th>{{ _('Enable/Disable') }}</th>
+                        <th class="w-25">{{ _('Activation E-Mail') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr class="align-middle">
+                            <th scope="row">{{ user.user_id }}</th>
+                            <td>{{ user.username }}</td>
+                            <td>
+                                <form method="POST"
+                                        {% if user.active %}
+                                      action="{{ url_for('admin.administrator.disable') }}"
+                                        {% elif not user.active %}
+                                      action="{{ url_for('admin.administrator.enable') }}"
+                                        {% endif %}
+                                >
+                                    {{ form.csrf_token }}
+                                    {{ form.user_id(value=user.user_id) }}
+                                    <button class="btn p-0 border-0 {% if user.username == current_user.username %} disabled{% endif %}"
+                                            type="submit"
+                                    >
+                                        {% if user.active %}
+                                            <i class="bi bi-toggle-on text-success fs-4"></i>
+                                        {% elif not user.active %}
+                                            <i class="bi bi-toggle-off fs-4"></i>
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{{ url_for('admin.administrator.send_activation_email') }}" method="POST">
+                                    {{ mail_form.user_id(value=user.user_id) }}
+                                    {{ mail_form.csrf_token }}
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                        {{ _('Send') }}
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
