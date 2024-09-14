@@ -34,7 +34,6 @@ dependencies = [
     "cryptography",
     "requests",
     "python-dotenv",
-    "asciistuff",
     "gunicorn",
     "elasticsearch",
     "beautifulsoup4",
