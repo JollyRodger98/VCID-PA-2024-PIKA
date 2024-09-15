@@ -139,6 +139,12 @@ def delete_authors(author_id):
     if not target_author:
         return ApiResponse(success=False, message="Author not found", status_code=404).model_dump(), 404
 
+    # Manually prevent deletion of authors with assigned books, SQLAlchemy does not handle it correctly. Possibly due
+    # to a bug. When trying to manually delete an author with SQL statement the deletion is correctly prevented.
+    if len(target_author.books) != 0:
+        msg = f"Failed to delete author '{author_id}'. Authors cannot be deleted when books are still assigned to them."
+        return ApiResponse(success=False, message="Delete failed", details=msg, status_code=400).model_dump(), 400
+
     deleted_author = AuthorBase.from_orm(target_author)
 
     try:
