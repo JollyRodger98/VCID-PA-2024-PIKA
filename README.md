@@ -3,14 +3,31 @@
 ## Production
 
 ### Docker Compose
+Create an `.env` file with the following content:
+```
+ELASTIC_PASSWORD=Tim123456
+KIBANA_PASSWORD=Tim123456
+STACK_VERSION=8.13.3
+CLUSTER_NAME=docker-cluster
+LICENSE=basic
+ES_PORT=9200
+KIBANA_PORT=5601
+MEM_LIMIT=1073741824
+```
 
-Run `docker compose` to start all docker containers for production.
+The contents of the .env file should be copied as they are. Passwords may be changed if desired.
+
+__Warning__: On some Platforms the command `sudo sysctl -w vm.max_map_count=262144` needs to be executed for the elastic cluster to run correctly.
+
+Run the following `docker compose` command to start all docker containers for production.
 
 ```shell
 docker compose \
-    -f compose.yml \
-    -f compose.production.yml \
-    up -d
+  --file compose.yaml \
+  --file docker/compose.production.yaml \
+  --project-name pika \
+  up \
+  --detach
     
 ```
 
